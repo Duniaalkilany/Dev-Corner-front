@@ -1,45 +1,44 @@
-import './feed.css'
-import Share from '../share/Share'
-import Post from '../post/Post'
-import { useEffect, useState, useContext } from "react";
+import './feed.css';
+import Share from '../share/Share';
+import Post from '../post/Post';
+import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from '../../context/AuthContext';
 export default function Feed({ username }) {
-    const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
 
-    const { user } = useContext(AuthContext);
-    useEffect(() => {
-// console.log('feed rendered');
-const fetchPosts = async () => {
+  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    // console.log('feed rendered');
+    const fetchPosts = async () => {
+      const res = username
+        ? //timeline posts===> timeline user
+          await axios.get('/posts/profile/' + username)
+        : //timeline posts===> timeline user
+          await axios.get('posts/timeline/' + user.id);
+      // console.log(res);
+      setPosts(
+        res.data.sort((p1, p2) => {
+          return new Date(p2.createdAt) - new Date(p1.createdAt);
+        })
+      );
+    };
+    fetchPosts();
+  }, [username, user.id]);
 
-    const res = username
-    //timeline posts===> timeline user 
-    ?await  axios.get("/posts/profile/" + username)
-    //timeline posts===> timeline user  
-    :await  axios.get("posts/timeline/"+ user.id)
-    // console.log(res);
-    setPosts(res.data.sort((p1, p2) => {
-        return new Date(p2.createdAt) - new Date(p1.createdAt);
-      }))
+  return (
+    <div className='feed'>
+      <div className='feedWrapper'>
+        {/*create share component===> to share any thing in feed side  */}
 
-}
-fetchPosts()
-    },[username ,user.id])
+        {(!username || username === user.username) && <Share />}
 
-    return (
-        <div className="feed">
-           <div className="feedWrapper">
-{/*create share component===> to share any thing in feed side  */}
+        {/*create post component===> for posts */}
 
-{(!username || username === user.username) && <Share />}
-           
-{/*create post component===> for posts */} 
-
-{posts.map((p) => (
+        {posts.map((p) => (
           <Post key={p.id} post={p} />
         ))}
-    
-           </div>
-        </div>
-    )
+      </div>
+    </div>
+  );
 }
