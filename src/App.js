@@ -17,7 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/">
     {/*if there is user go==>home , no user===>register */}
-        {user ? <Home /> : <Register />}
+        {user ? <Home /> : <Login />}
         </Route>
         <Route path="/login"> {user ? <Redirect to="/" /> : <Login />}
         </Route>

@@ -1,13 +1,13 @@
 import './feed.css'
 import Share from '../share/Share'
 import Post from '../post/Post'
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from 'axios';
-// import { Posts } from "../../dummyData";
+import { AuthContext } from "../../context/AuthContext";
 export default function Feed({ username }) {
     const [posts, setPosts] = useState([]);
 
-
+    const { user } = useContext(AuthContext);
     useEffect(() => {
 // console.log('feed rendered');
 const fetchPosts = async () => {
@@ -16,19 +16,23 @@ const fetchPosts = async () => {
     //timeline posts===> timeline user 
     ?await  axios.get("/posts/profile/" + username)
     //timeline posts===> timeline user  
-    :await  axios.get("posts/timeline/165")
+    :await  axios.get("posts/timeline/"+ user.id)
     // console.log(res);
-    setPosts(res.data)
+    setPosts(res.data.sort((p1, p2) => {
+        return new Date(p2.createdAt) - new Date(p1.createdAt);
+      }))
 
 }
 fetchPosts()
-    },[username])
+    },[username ,user.id])
 
     return (
         <div className="feed">
            <div className="feedWrapper">
 {/*create share component===> to share any thing in feed side  */}
-            <Share />
+
+{(!username || username === user.username) && <Share />}
+           
 {/*create post component===> for posts */} 
 
 {posts.map((p) => (

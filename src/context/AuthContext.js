@@ -4,7 +4,23 @@ import { createContext, useReducer,useEffect } from "react";
 import AuthReducer from "./AuthReducer";
 //initial state
 const INITIAL_STATE = {
-    user: null,
+    user:JSON.parse(localStorage.getItem("user")) || null,
+  //{
+  //     id: 180,
+  //     username: "dunia",
+  //     email: "dunia@gmail.com",
+  //     password: "$2b$10$Ga4/8ItC96XO4CAWleBR2.C34OiJ89mb74FNFbmNOq5/ZSZc3cjDK",
+  //     profilePicture: "dunia/saif.png",
+  //     coverPicture: "",
+  //     followers: [],
+  //     followings: [],
+  //     isAdmin: false,
+  //     desc: "hello from dunia",
+  //     city: "Amman",
+  //     from: "Jordan",
+  //     relationship: "1",
+      
+  // },
     isFetching: false,
     error: false,
   };

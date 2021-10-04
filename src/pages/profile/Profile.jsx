@@ -5,6 +5,8 @@ import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 //hook clled use params use it to get ====> username params from URL
 import { useParams } from "react-router";
 export default function Profile() {
@@ -12,7 +14,8 @@ export default function Profile() {
     const [user, setUser] = useState({});
     const username = useParams().username
     console.log("params.username======>",username);
-
+    const { user: currentUser, dispatch } = useContext(AuthContext);
+ 
     useEffect(() => {
         const fetchUser = async () => {
             //get a user route by ==> username
@@ -21,25 +24,35 @@ export default function Profile() {
         };
         fetchUser();
       }, [username]);
+
     return (
         <>
         <Topbar />
         <div className="profile">
-          {/* <Sidebar /> */}
+          <Sidebar />
           <div className="profileRight">
             <div className="profileRightTop">
               <div className="profileCover">
                 <img
                   className="profileCoverImg"
-                //   src={`${PF}post/3 (1).jpeg`}
-                src={user.coverPicture || PF + "person/nocover-picture.png"}
+               
+                  src={
+                    user.coverPicture
+                      ? PF + user.coverPicture
+                      : PF + "person/nocover-picture.png"
+                     
+                  }
                   alt=""
                   
                 />
                 <img
                   className="profileUserImg"
-                //   src={`${PF}person/dunia.png`}
-                src={user.profilePicture || PF + "person/noprof-pic.png"}
+               
+                  src={
+                    user.profilePicture
+                      ? PF + user.profilePicture
+                      : PF + "person/noAvatar.png"
+                  }
                   alt=""
                 />
               </div>

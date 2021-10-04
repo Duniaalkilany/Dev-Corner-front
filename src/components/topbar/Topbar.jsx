@@ -3,10 +3,22 @@ import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Button } from "@material-ui/core";
 
 export default function Topbar() {
-  const { user } = useContext(AuthContext);
+  const { user,dispatch } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  
+  const logoutHandler = async () => {
+    try {
+      if (user) {
+    
+        dispatch({ type: "LOGIN_START" });
+      } 
+    } catch (err) {
+    }
+  };
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -27,7 +39,10 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarLinks">
           <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          {/* <span className="topbarLink">Timeline</span> */}
+          <Button variant="contained" color="light" onClick={logoutHandler} >
+ Logout
+</Button>
         </div>
         <div className="topbarIcons">
           <div className="topbarIconItem">
