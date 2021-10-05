@@ -20,9 +20,6 @@ export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const [open, setOpen] = useState(false);
-  const [userCity, setUserCity] = useState(user.city);
-  const [userFrom, setUserFrom] = useState(user.from);
-  const [userRelationship, setUserRelationship] = useState(user.relationship);
 
   const { user: currentUser, dispatch } = useContext(AuthContext);
 
@@ -82,18 +79,24 @@ export default function Rightbar({ user }) {
   const SimpleDialog = (props) => {
     const { onClose, selectedValue, open } = props;
 
+    let city = '',
+      from = '',
+      relationship = '';
+
     const handleCity = (e) => {
       e.preventDefault();
-      setUserCity(e.target.value);
+      city = e.target.value;
+      // setUserCity(e.target.value);
     };
     const handleFrom = (e) => {
       e.preventDefault();
-      setUserFrom(e.target.value);
+      from = e.target.value;
+      // setUserFrom(e.target.value);
     };
     const handleRelationship = (e) => {
       e.preventDefault();
-      setUserRelationship(e.target.value);
-      console.log('asfdasf');
+      relationship = e.target.value;
+      // setUserRelationship(e.target.value);
     };
 
     const updateInfo = (e) => {
@@ -102,9 +105,9 @@ export default function Rightbar({ user }) {
       axios
         .put(`/users/${currentUser.id}`, {
           userId: currentUser.id,
-          city: userCity,
-          from: userFrom,
-          relationship: userRelationship,
+          city: city,
+          from: from,
+          relationship: relationship,
         })
         .then(function (response) {
           window.location.reload(false);
@@ -123,29 +126,30 @@ export default function Rightbar({ user }) {
         <DialogTitle>Update user info</DialogTitle>
         <FormControl>
           <TextField
-            value={userCity}
+            defaultValue={user ? user.city : ''}
             onChange={handleCity}
             id='city'
             label='City'
             variant='outlined'
           />
           <TextField
-            value={userFrom}
+            defaultValue={user ? user.from : ''}
             onChange={handleFrom}
             id='from'
             label='From'
             variant='outlined'
           />
-          <Select
+          <TextField
             id='relationship'
-            value={userRelationship}
+            defaultValue={user ? user.relationship : ''}
             label='Relationship'
+            select
             onChange={handleRelationship}
           >
             <MenuItem value='1'>Single</MenuItem>
             <MenuItem value='2'>Married</MenuItem>
             <MenuItem value='3'>Other</MenuItem>
-          </Select>
+          </TextField>
           <Button type='submit' onClick={updateInfo}>
             Update
           </Button>
