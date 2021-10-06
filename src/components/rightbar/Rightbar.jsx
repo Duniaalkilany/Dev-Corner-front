@@ -123,6 +123,7 @@ console.log('followed',followed);
         })
         .then(function (response) {
           window.location.reload(false);
+          // window.location.reload();
         })
         .catch(function (error) {
           console.log("xxxxxxxxxxxxxxxx",error);

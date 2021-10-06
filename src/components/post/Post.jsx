@@ -54,7 +54,9 @@ export default function Post({ post }) {
           userId: currentUser.id,
         },
       });
-      window.location.reload(false);
+     
+      // window.location.reload(false);
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
