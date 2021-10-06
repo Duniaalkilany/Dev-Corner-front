@@ -20,7 +20,7 @@ export default function Profile() {
     useEffect(() => {
         const fetchUser = async () => {
             //get a user route by ==> username
-          const res = await axios.get(`/users?username=${username}`);
+          const res = await axios.get(`https://dev-corner-back.herokuapp.com/api/users?username=${username}`);
           setUser(res.data);
         };
         fetchUser();

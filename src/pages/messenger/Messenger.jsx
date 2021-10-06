@@ -53,7 +53,7 @@ export default function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + user.id);
+        const res = await axios.get("https://dev-corner-back.herokuapp.com/api/conversations/" + user.id);
         setConversations(res.data);
       } catch (err) {
         console.log(err);
@@ -65,7 +65,7 @@ export default function Messenger() {
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentChat?.id);
+        const res = await axios.get("https://dev-corner-back.herokuapp.com/api/messages/" + currentChat?.id);
         setMessages(res.data);
       } catch (err) {
         console.log(err);
@@ -93,7 +93,7 @@ export default function Messenger() {
     });
 
     try {
-      const res = await axios.post("/messages", message);
+      const res = await axios.post("https://dev-corner-back.herokuapp.com/api/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
     } catch (err) {
