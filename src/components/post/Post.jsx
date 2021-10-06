@@ -36,17 +36,18 @@ export default function Post({ post }) {
     fetchUser();
   }, [post.userId]);
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
     try {
-      axios.put('https://dev-corner-back.herokuapp.com/api/posts/' + post.id + '/like', { userId: currentUser.id });
+     await axios.put('https://dev-corner-back.herokuapp.com/api/posts/' + post.id + '/like', { userId: currentUser.id });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
 
-  const deleteHandler = () => {
+
+  const deleteHandler =async () => {
     try {
-      axios({
+     await axios({
         method: 'delete',
         url: 'https://dev-corner-back.herokuapp.com/api/posts/' + post.id,
         data: {

@@ -16,6 +16,14 @@ export default function Profile() {
     const username = useParams().username
     console.log("params.username======>",username);
     const { user: currentUser, dispatch } = useContext(AuthContext);
+    useEffect(() => {
+      const fetchUser = async () => {
+          //get a user route by ==> username
+        const res = await axios.get(`https://dev-corner-back.herokuapp.com/api/users?username=${username}`);
+        setUser(res.data);
+      };
+      fetchUser();
+    }, []);
     
     useEffect(() => {
         const fetchUser = async () => {

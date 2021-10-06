@@ -112,10 +112,10 @@ console.log('followed',followed);
       // setUserRelationship(e.target.value);
     };
 
-    const updateInfo = (e) => {
+    const updateInfo = async(e) => {
       e.preventDefault();
 
-      axios.put(`https://dev-corner-back.herokuapp.com/api/users/${currentUser.id}`, {
+     await axios.put(`https://dev-corner-back.herokuapp.com/api/users/${currentUser.id}`, {
           userId: currentUser.id,
           city: city,
           from: from,
