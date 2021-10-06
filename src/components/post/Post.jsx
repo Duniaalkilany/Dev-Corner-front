@@ -58,7 +58,8 @@ export default function Post({ post }) {
       console.log(err);
     }
   };
-
+console.log("useeeeeeeeeeeeer",user);
+console.log(`/profile/${user.username}`);
   return (
     <div className='post'>
       <div className='postWrapper'>
@@ -84,7 +85,10 @@ export default function Post({ post }) {
           </div>
           <div className='postTopRight'>
             {/* <MoreVert /> */}
-            <MenuItem key='delete' selected='delete' onClick={deleteHandler}>
+            {/* <MenuItem key='delete' selected='delete' onClick={deleteHandler}>
+              Delete
+            </MenuItem> */}
+            <MenuItem key='delete'  onClick={deleteHandler}>
               Delete
             </MenuItem>
           </div>
