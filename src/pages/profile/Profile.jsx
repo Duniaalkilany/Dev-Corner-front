@@ -9,13 +9,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 //hook clled use params use it to get ====> username params from URL
 import { useParams } from "react-router";
+import { Button } from "@material-ui/core";
 export default function Profile() {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
     const [user, setUser] = useState({});
     const username = useParams().username
     console.log("params.username======>",username);
     const { user: currentUser, dispatch } = useContext(AuthContext);
- 
+    
     useEffect(() => {
         const fetchUser = async () => {
             //get a user route by ==> username
@@ -24,6 +25,10 @@ export default function Profile() {
         };
         fetchUser();
       }, [username]);
+/**============================================================================== */
+
+
+      /**============================================================================ */
 
     return (
         <>
@@ -33,6 +38,7 @@ export default function Profile() {
           <div className="profileRight">
             <div className="profileRightTop">
               <div className="profileCover">
+             
                 <img
                   className="profileCoverImg"
                

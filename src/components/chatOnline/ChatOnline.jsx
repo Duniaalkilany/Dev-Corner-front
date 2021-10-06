@@ -20,7 +20,7 @@ console.log('friends============>',friends);
 
 
   useEffect(() => {
-    setOnlineFriends(friends.filter((f) => onlineUsers.includes(""+ f.id)));
+    setOnlineFriends(friends.filter((f) => onlineUsers.includes(f.id)));
   }, [friends, onlineUsers]);
 
 console.log('onlineFriends==================',onlineFriends);
@@ -37,6 +37,7 @@ console.log('onlineFriends==================',onlineFriends);
 
   return (
     <div className="chatOnline">
+
       {onlineFriends.map((o) => (
         <div className="chatOnlineFriend" onClick={() => handleClick(o)}>
           <div className="chatOnlineImgContainer">
