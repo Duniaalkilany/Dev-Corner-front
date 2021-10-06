@@ -1,5 +1,6 @@
 
 import './post.css';
+
 // import { MoreVert } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -15,12 +16,15 @@ import MenuItem from '@mui/material/MenuItem';
 
 export default function Post({ post }) {
   //using set satte for likes functionality
+
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const [userPosts, setPost] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
 
+  console.log("heyyyyyyyyyyy",post.userId);
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser.id));
   }, [currentUser.id, post.likes]);
@@ -46,6 +50,7 @@ export default function Post({ post }) {
 
 
   const deleteHandler =async () => {
+   
     try {
      await axios({
         method: 'delete',
@@ -54,9 +59,10 @@ export default function Post({ post }) {
           userId: currentUser.id,
         },
       });
-     
-      // window.location.reload(false);
-      window.location.reload();
+      
+    
+      window.location.reload(false);
+      // window.location.reload();
     } catch (err) {
       console.log(err);
     }
