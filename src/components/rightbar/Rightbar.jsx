@@ -38,7 +38,7 @@ console.log('followed',followed);
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get('https://dev-corner-back.herokuapp.com/api/users/friends/' + user.id);
+        const friendList = await axios.get('https://dev-corner-back.herokuapp.com/api/users/friends/'+user.id);
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
@@ -115,8 +115,7 @@ console.log('followed',followed);
     const updateInfo = (e) => {
       e.preventDefault();
 
-      axios
-        .put(`https://dev-corner-back.herokuapp.com/api/users/${currentUser.id}`, {
+      axios.put(`https://dev-corner-back.herokuapp.com/api/users/${currentUser.id}`, {
           userId: currentUser.id,
           city: city,
           from: from,
@@ -126,7 +125,7 @@ console.log('followed',followed);
           window.location.reload(false);
         })
         .catch(function (error) {
-          console.log(error);
+          console.log("xxxxxxxxxxxxxxxx",error);
         });
     };
 

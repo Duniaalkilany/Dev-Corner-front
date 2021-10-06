@@ -22,14 +22,14 @@ function App() {
           {/*if there is user go==>home , no user===>register */}
           {user ? <Home /> : <Login />}
         </Route>
-        <Route  path='/login'> {user ? <Redirect to='/' /> : <Login />}</Route>
-        <Route  path='/register'>
+        <Route exact path='/login'> {user ? <Redirect to='/' /> : <Login />}</Route>
+        <Route exact path='/register'>
           {user ? <Redirect to='/' /> : <Register />}
         </Route>
-        <Route  path='/profile/:username'>
+        <Route exact path='/profile/:username'>
           {user ? <Profile /> : <Login />}
         </Route>
-        <Route  path="/messenger">
+        <Route exact path="/messenger">
          {!user ? <Redirect to="/" /> : <Messenger />}
        </Route>
       </Switch>
