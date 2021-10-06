@@ -31,7 +31,7 @@ export default function Rightbar({ user }) {
   const [followed, setFollowed]=useState(false)
 
   useEffect(() => {
-    setFollowed(currentUser.followings.includes(user?.id))},[currentUser,user])
+    setFollowed(currentUser.followings.includes(""+ user?.id))},[currentUser,user])
 console.log('currentUser',currentUser);
 console.log('user',user);
 console.log('followed',followed);
@@ -117,7 +117,7 @@ console.log('followed',followed);
 
       axios
         .put(`https://dev-corner-back.herokuapp.com/api/users/${currentUser.id}`, {
-          userId: currentUser.id,
+          userId:""+ currentUser.id,
           city: city,
           from: from,
           relationship: relationship,

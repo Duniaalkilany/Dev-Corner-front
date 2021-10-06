@@ -48,7 +48,7 @@ export default function Post({ post }) {
     try {
       axios({
         method: 'delete',
-        url: '/posts/' + post.id,
+        url: 'https://dev-corner-back.herokuapp.com/api/posts/' + post.id,
         data: {
           userId: currentUser.id,
         },
