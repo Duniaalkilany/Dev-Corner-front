@@ -119,7 +119,7 @@ export default function Share() {
   const submitHandler = async (e) => {
     e.preventDefault();
     const newPost = {
-      userId: user.id,
+      userId:""+ user.id,
       desc: desc.current.value,
       
     };
