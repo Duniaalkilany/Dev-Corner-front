@@ -29,7 +29,7 @@ export default function Register() {
         password: password.current.value,
       };
       try {
-        await axios.post('/auth/register', user);
+        await axios.post('https://dev-corner-back.herokuapp.com/api/auth/register', user);
         history.push('/login');
       } catch (err) {
         console.log(err);
@@ -78,11 +78,16 @@ export default function Register() {
             />
             <button className='loginButton' type='submit'>
               Sign Up
+              <Link
+                to={'./login'}
+                color='white'
+                style={{ textDecoration: 'none' }}
+              ></Link>
             </button>
 
             <button className='loginRegisterButton'>
               <Link
-                to={'./Login'}
+                to={'/'}
                 color='white'
                 style={{ textDecoration: 'none' }}
               >

@@ -29,7 +29,7 @@ export default function Post({ post }) {
     // console.log('feed rendered');
     const fetchUser = async () => {
       //get a user posts route by
-      const res = await axios.get(`/users?userId=${post.userId}`);
+      const res = await axios.get(`https://dev-corner-back.herokuapp.com/api/users?userId=${post.userId}`);
       console.log(res);
       setUser(res.data);
     };
@@ -38,7 +38,7 @@ export default function Post({ post }) {
 
   const likeHandler = () => {
     try {
-      axios.put('/posts/' + post.id + '/like', { userId: currentUser.id });
+      axios.put('https://dev-corner-back.herokuapp.com/api/posts/' + post.id + '/like', { userId: currentUser.id });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
@@ -48,7 +48,7 @@ export default function Post({ post }) {
     try {
       axios({
         method: 'delete',
-        url: '/posts/' + post.id,
+        url: 'https://dev-corner-back.herokuapp.com/api/posts/' + post.id,
         data: {
           userId: currentUser.id,
         },

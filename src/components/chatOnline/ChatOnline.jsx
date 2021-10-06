@@ -10,7 +10,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
 //get friends //following list
   useEffect(() => {
     const getFriends = async () => {
-      const res = await axios.get("/users/friends/" + currentId);
+      const res = await axios.get("https://dev-corner-back.herokuapp.com/api/users/friends/" + currentId);
       setFriends(res.data);
     };
 
@@ -20,14 +20,14 @@ console.log('friends============>',friends);
 
 
   useEffect(() => {
-    setOnlineFriends(friends.filter((f) => onlineUsers.includes(""+ f.id)));
+    setOnlineFriends(friends.filter((f) => onlineUsers.includes( f.id)));
   }, [friends, onlineUsers]);
 
 console.log('onlineFriends==================',onlineFriends);
   const handleClick = async (user) => {
     try {
       const res = await axios.get(
-        `/conversations/find/${currentId}/${user.id}`
+        `https://dev-corner-back.herokuapp.com/api/conversations/find/${currentId}/${user.id}`
       );
       setCurrentChat(res.data);
     } catch (err) {
@@ -37,6 +37,7 @@ console.log('onlineFriends==================',onlineFriends);
 
   return (
     <div className="chatOnline">
+
       {onlineFriends.map((o) => (
         <div className="chatOnlineFriend" onClick={() => handleClick(o)}>
           <div className="chatOnlineImgContainer">

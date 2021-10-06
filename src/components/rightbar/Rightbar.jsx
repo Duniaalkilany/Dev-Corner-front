@@ -31,14 +31,14 @@ export default function Rightbar({ user }) {
   const [followed, setFollowed]=useState(false)
 
   useEffect(() => {
-    setFollowed(currentUser.followings.includes(user?.id))},[currentUser,user])
+    setFollowed(currentUser.followings.includes( user?.id))},[currentUser,user])
 console.log('currentUser',currentUser);
 console.log('user',user);
 console.log('followed',followed);
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get('/users/friends/' + user.id);
+        const friendList = await axios.get('https://dev-corner-back.herokuapp.com/api/users/friends/'+user.id);
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
@@ -50,7 +50,7 @@ console.log('followed',followed);
   const handleClick = async () => {
     try {
       if (followed) {
-        await axios.put(`/users/${user.id}/unfollow`, {
+        await axios.put(`https://dev-corner-back.herokuapp.com/api/users/${user.id}/unfollow`, {
           userId:""+ currentUser.id,
         });
         dispatch({ type: 'UNFOLLOW', payload: user.id });
@@ -58,7 +58,7 @@ console.log('followed',followed);
       }
       
       else {
-        await axios.put(`/users/${user.id}/follow`, {
+        await axios.put(`https://dev-corner-back.herokuapp.com/api/users/${user.id}/follow`, {
           userId:""+ currentUser.id,
         });
         dispatch({ type: 'FOLLOW', payload: user.id });
@@ -115,8 +115,7 @@ console.log('followed',followed);
     const updateInfo = (e) => {
       e.preventDefault();
 
-      axios
-        .put(`/users/${currentUser.id}`, {
+      axios.put(`https://dev-corner-back.herokuapp.com/api/users/${currentUser.id}`, {
           userId: currentUser.id,
           city: city,
           from: from,
@@ -126,7 +125,7 @@ console.log('followed',followed);
           window.location.reload(false);
         })
         .catch(function (error) {
-          console.log(error);
+          console.log("xxxxxxxxxxxxxxxx",error);
         });
     };
 

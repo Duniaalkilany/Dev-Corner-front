@@ -5,7 +5,7 @@ export const loginCall = async (userCredential, dispatch) => {
     //dispatch first action //then make req
   dispatch({ type: "LOGIN_START" });
   try {
-    const res = await axios.post("/auth/login", userCredential);
+    const res = await axios.post("https://dev-corner-back.herokuapp.com/api/auth/login", userCredential);
     //if req success and i have res ==>dispatch second action==>login success
     dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
   } catch (err) {
