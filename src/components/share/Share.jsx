@@ -163,12 +163,12 @@ export default function Share() {
           />
         </div>
         <hr className="shareHr" />
-        {/* {file && (
+        {file && (
           <div className="shareImgContainer">
             <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
             <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
           </div>
-        )} */}
+        )}
         <form className="shareBottom" onSubmit={submitHandler}>
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
