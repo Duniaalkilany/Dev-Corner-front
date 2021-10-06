@@ -13,3 +13,4 @@ Rightbar
 //fetching from api
 1. starting with timeline route
 2. in feed component ----> 
+//using socket ===> when any user connect to app ==> each user have unique socket id 
