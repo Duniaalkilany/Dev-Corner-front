@@ -78,11 +78,16 @@ export default function Register() {
             />
             <button className='loginButton' type='submit'>
               Sign Up
+              <Link
+                to={'./login'}
+                color='white'
+                style={{ textDecoration: 'none' }}
+              ></Link>
             </button>
 
             <button className='loginRegisterButton'>
               <Link
-                to={'./Login'}
+                to={'/'}
                 color='white'
                 style={{ textDecoration: 'none' }}
               >

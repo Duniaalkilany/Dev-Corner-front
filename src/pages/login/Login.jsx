@@ -67,7 +67,7 @@ export default function Login() {
                 <CircularProgress color='white' size='20px' />
               ) : (
                 <Link
-                  to={'./Register'}
+                  to={'./register'}
                   color='white'
                   style={{ textDecoration: 'none' }}
                 >
