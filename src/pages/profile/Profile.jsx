@@ -25,6 +25,8 @@ export default function Profile() {
         };
         fetchUser();
       }, [username]);
+
+      console.log('user=============',user);
 /**============================================================================== */
 
 
