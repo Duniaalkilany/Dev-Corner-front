@@ -1,5 +1,6 @@
 
 import './post.css';
+
 // import { MoreVert } from '@material-ui/icons';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -15,12 +16,15 @@ import MenuItem from '@mui/material/MenuItem';
 
 export default function Post({ post }) {
   //using set satte for likes functionality
+
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
+  const [userPosts, setPost] = useState({});
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const { user: currentUser } = useContext(AuthContext);
 
+  console.log("heyyyyyyyyyyy",post.userId);
   useEffect(() => {
     setIsLiked(post.likes.includes(currentUser.id));
   }, [currentUser.id, post.likes]);
@@ -36,29 +40,35 @@ export default function Post({ post }) {
     fetchUser();
   }, [post.userId]);
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
     try {
-      axios.put('https://dev-corner-back.herokuapp.com/api/posts/' + post.id + '/like', { userId: currentUser.id });
+     await axios.put('https://dev-corner-back.herokuapp.com/api/posts/' + post.id + '/like', { userId: currentUser.id });
     } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
 
-  const deleteHandler = () => {
+
+  const deleteHandler =async () => {
+   
     try {
-      axios({
+     await axios({
         method: 'delete',
         url: 'https://dev-corner-back.herokuapp.com/api/posts/' + post.id,
         data: {
           userId: currentUser.id,
         },
       });
+      
+    
       window.location.reload(false);
+      // window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
-
+console.log("useeeeeeeeeeeeer",user);
+console.log(`/profile/${user.username}`);
   return (
     <div className='post'>
       <div className='postWrapper'>
@@ -84,7 +94,10 @@ export default function Post({ post }) {
           </div>
           <div className='postTopRight'>
             {/* <MoreVert /> */}
-            <MenuItem key='delete' selected='delete' onClick={deleteHandler}>
+            {/* <MenuItem key='delete' selected='delete' onClick={deleteHandler}>
+              Delete
+            </MenuItem> */}
+            <MenuItem key='delete'  onClick={deleteHandler}>
               Delete
             </MenuItem>
           </div>

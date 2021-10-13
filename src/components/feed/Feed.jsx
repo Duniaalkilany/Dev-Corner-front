@@ -11,8 +11,9 @@ export default function Feed({ username }) {
     useEffect(() => {
 // console.log('feed rendered');
 const fetchPosts = async () => {
-
+    console.log("usernameeeeeee>>>>>>>>>","https://dev-corner-back.herokuapp.com/api/posts/profile/" + username);
     const res = username
+   
     //timeline posts===> timeline user 
     ?await  axios.get("https://dev-corner-back.herokuapp.com/api/posts/profile/" + username)
     //timeline posts===> timeline user  

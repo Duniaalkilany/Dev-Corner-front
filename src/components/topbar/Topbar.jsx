@@ -42,7 +42,7 @@ export default function Topbar() {
         <div className='topbarLinks'>
           {/* <span className='topbarLink'>Homepage</span> */}
           {/* <span className="topbarLink">Timeline</span> */}
-          <Button variant='contained' color='light' onClick={logoutHandler}>
+          <Button variant='contained' color='default' onClick={logoutHandler}>
             Logout
           </Button>
         </div>
